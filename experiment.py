@@ -26,11 +26,11 @@ def generate_experiment_id_and_subfolder(experiment_path):
     # Choose a experiment number for a subsubfolder:
     exp_number = np.random.randint(1000000)
     tries = 0
-    while tries <= 10 and (os.path.exists(os.path.join(experiment_path, 'results_{:d}.pkl'.format(exp_number)))
+    while tries < 10 and (os.path.exists(os.path.join(experiment_path, 'results_{:d}.pkl'.format(exp_number)))
                            or os.path.exists(os.path.join(experiment_path, 'results_{:d}.temp'.format(exp_number)))):
         exp_number = np.random.randint(1000000)
         tries += 1
-    if tries == 100:
+    if tries == 10:
         print("Could not find a file that didn't exist, aborting...")
         return -1
     else:
@@ -83,7 +83,7 @@ def run_single_experiment(pro_dataset_path, experiments_path_ext, exp_params, se
         """
         exp_number = int((seed % 1e3) * 1000000) + int(time.time()*1e12 % 1e3) * 1000 + int((os.getpid()) % 1e3)
         tries = 0
-        while tries <= 10 and (os.path.exists(os.path.join(experiments_path_ext, 'results_{:06d}.pkl'.format(exp_number)))
+        while tries < 10 and (os.path.exists(os.path.join(experiments_path_ext, 'results_{:06d}.pkl'.format(exp_number)))
                                or os.path.exists(os.path.join(experiments_path_ext, 'results_{:06d}.temp'.format(exp_number)))):
             exp_number = int((seed % 1e3) * 10000000) + int(time.time()*1e12 % 1e3) * 10000 + int((os.getpid()) % 1e4)
             tries += 1
