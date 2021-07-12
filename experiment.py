@@ -30,7 +30,7 @@ def generate_experiment_id_and_subfolder(experiment_path):
                            or os.path.exists(os.path.join(experiment_path, 'results_{:d}.temp'.format(exp_number)))):
         exp_number = np.random.randint(1000000)
         tries += 1
-    if tries == 100:
+    if tries == 10:
         print("Could not find a file that didn't exist, aborting...")
         return -1
     else:
